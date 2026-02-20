@@ -11,6 +11,7 @@ export default defineConfig({
     root: __dirname,
     globals: true,
     environment: 'jsdom',
+    setupFiles: ['./tests/setup.ts'],
     include: ['tests/**/*.test.ts'],
     pool: 'forks',
     isolate: true,
