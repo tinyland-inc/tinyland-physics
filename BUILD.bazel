@@ -1,0 +1,60 @@
+"""
+BUILD.bazel for @tummycrypt/tinyland-physics.
+
+Dual-mode build: works with both pnpm (standalone) and Bazel (CI/production).
+  Standalone: cd packages/tinyland-physics && pnpm build
+  Monorepo:   bazel build //packages/tinyland-physics/...
+"""
+
+load("@aspect_rules_js//js:defs.bzl", "js_library", "js_test")
+load("@aspect_rules_js//npm:defs.bzl", "npm_package")
+load("@npm//:defs.bzl", "npm_link_all_packages")
+
+npm_link_all_packages(name = "node_modules")
+
+js_library(
+    name = "tinyland_physics",
+    srcs = glob(["src/**/*.ts", "src/**/*.js"]),
+    deps = [
+        ":node_modules",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+npm_package(
+    name = "pkg",
+    srcs = [
+        "package.json",
+        ":tinyland_physics",
+    ],
+    package = "@tummycrypt/tinyland-physics",
+    version = "0.1.0",
+    visibility = ["//visibility:public"],
+)
+
+js_test(
+    name = "test",
+    data = [
+        ":tinyland_physics",
+        ":node_modules",
+        ":node_modules/vitest",
+        "vitest.config.ts",
+    ] + glob(["tests/**/*.ts"]),
+    entry_point = ":node_modules/vitest/vitest.mjs",
+    args = [
+        "run",
+        "--reporter=verbose",
+        "--config",
+        "$(rootpath vitest.config.ts)",
+    ],
+    log_level = "info",
+    visibility = ["//visibility:public"],
+)
+
+exports_files(
+    [
+        "package.json",
+        "vitest.config.ts",
+    ],
+    visibility = ["//visibility:public"],
+)

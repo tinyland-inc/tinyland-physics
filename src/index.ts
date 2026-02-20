@@ -1,5 +1,5 @@
 /**
- * @tinyland-inc/tinyland-physics
+ * @tummycrypt/tinyland-physics
  *
  * Physics simulation engines for blob animations, scroll handling, and device motion.
  *
