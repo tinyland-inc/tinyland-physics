@@ -38,7 +38,7 @@ js_test(
         "//:node_modules/vitest",
         "vitest.config.ts",
     ] + glob(["tests/**/*.ts"]),
-    entry_point = "//:node_modules/vitest/vitest.mjs",
+    entry_point = "//:vitest_bin",
     args = [
         "run",
         "--reporter=verbose",
