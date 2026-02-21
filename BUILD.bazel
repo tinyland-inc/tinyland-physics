@@ -12,7 +12,7 @@ load("@aspect_rules_js//npm:defs.bzl", "npm_package")
 
 js_library(
     name = "tinyland_physics",
-    srcs = glob(["src/**/*.ts", "src/**/*.js"]),
+    srcs = glob(["src/**/*.ts", "src/**/*.js"], allow_empty = True),
     deps = [
         "//:node_modules",
     ],
