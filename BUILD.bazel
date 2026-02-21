@@ -8,15 +8,13 @@ Dual-mode build: works with both pnpm (standalone) and Bazel (CI/production).
 
 load("@aspect_rules_js//js:defs.bzl", "js_library", "js_test")
 load("@aspect_rules_js//npm:defs.bzl", "npm_package")
-load("@npm//:defs.bzl", "npm_link_all_packages")
 
-npm_link_all_packages(name = "node_modules")
 
 js_library(
     name = "tinyland_physics",
     srcs = glob(["src/**/*.ts", "src/**/*.js"]),
     deps = [
-        ":node_modules",
+        "//:node_modules",
     ],
     visibility = ["//visibility:public"],
 )
@@ -36,11 +34,11 @@ js_test(
     name = "test",
     data = [
         ":tinyland_physics",
-        ":node_modules",
-        ":node_modules/vitest",
+        "//:node_modules",
+        "//:node_modules/vitest",
         "vitest.config.ts",
     ] + glob(["tests/**/*.ts"]),
-    entry_point = ":node_modules/vitest/vitest.mjs",
+    entry_point = "//:node_modules/vitest/vitest.mjs",
     args = [
         "run",
         "--reporter=verbose",
