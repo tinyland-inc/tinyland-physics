@@ -6,7 +6,7 @@ Dual-mode build: works with both pnpm (standalone) and Bazel (CI/production).
   Monorepo:   bazel build //packages/tinyland-physics/...
 """
 
-load("@aspect_rules_js//js:defs.bzl", "js_library", "js_test")
+load("@aspect_rules_js//js:defs.bzl", "js_library")
 load("@aspect_rules_js//npm:defs.bzl", "npm_package")
 load("@npm//:defs.bzl", "npm_link_all_packages")
 load("@npm//:vitest/package_json.bzl", vitest_bin = "bin")
@@ -37,11 +37,12 @@ npm_package(
 vitest_bin.vitest_test(
     name = "test",
     data = [
-        ":tinyland_physics",
         ":node_modules",
+        "tsconfig.json",
+        "//packages:tsconfig.base.json",
         ":node_modules/vitest",
         "vitest.config.ts",
-    ] + glob(["tests/**/*.ts"]),
+    ] + glob(["src/**/*.ts"]) + glob(["tests/**/*.test.ts", "tests/**/*.ts"]),
     args = [
         "run",
         "--reporter=verbose",
