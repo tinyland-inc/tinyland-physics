@@ -9,7 +9,7 @@ Dual-mode build: works with both pnpm (standalone) and Bazel (CI/production).
 load("@aspect_rules_js//js:defs.bzl", "js_library", "js_test")
 load("@aspect_rules_js//npm:defs.bzl", "npm_package")
 load("@npm//:defs.bzl", "npm_link_all_packages")
-load("@npm//vitest:package_json.bzl", vitest_bin = "bin")
+load("@npm//:vitest/package_json.bzl", vitest_bin = "bin")
 
 npm_link_all_packages(name = "node_modules")
 
