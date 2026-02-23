@@ -25,9 +25,9 @@ import {
 } from '../src/schema';
 import type { ConvexBlob, BlobConfig } from '../src/types';
 
-// ============================================================================
-// BlobPhysics Tests
-// ============================================================================
+
+
+
 describe('BlobPhysics', () => {
 	let physics: BlobPhysics;
 
@@ -107,8 +107,8 @@ describe('BlobPhysics', () => {
 			const lightBlobs = lightPhysics.initializeBlobs();
 			const darkBlobs = darkPhysics.initializeBlobs();
 
-			// Light and dark modes may produce different number of blobs (different color palettes)
-			// The colors themselves should differ
+			
+			
 			expect(lightBlobs.length).toBeGreaterThan(0);
 			expect(darkBlobs.length).toBeGreaterThan(0);
 		});
@@ -116,13 +116,13 @@ describe('BlobPhysics', () => {
 		it('should support pride theme', () => {
 			const pridePhysics = new BlobPhysics(false, 'pride');
 			const blobs = pridePhysics.initializeBlobs();
-			expect(blobs.length).toBe(6); // Pride has 6 colors
+			expect(blobs.length).toBe(6); 
 		});
 
 		it('should support trans theme', () => {
 			const transPhysics = new BlobPhysics(false, 'trans');
 			const blobs = transPhysics.initializeBlobs();
-			expect(blobs.length).toBe(5); // Trans light has 5 colors
+			expect(blobs.length).toBe(5); 
 		});
 	});
 
@@ -131,7 +131,7 @@ describe('BlobPhysics', () => {
 			const blobs = physics.initializeBlobs();
 			const initialPositions = blobs.map((b) => ({ x: b.currentX, y: b.currentY }));
 
-			// Run many updates to accumulate movement
+			
 			for (let i = 0; i < 100; i++) {
 				physics.update(16, i * 0.016, { x: 0, y: 0 }, { x: 0, y: 0, z: 0 }, 0);
 			}
@@ -157,7 +157,7 @@ describe('BlobPhysics', () => {
 			physics.update(16, 0, { x: 0, y: 10 }, { x: 0, y: 0, z: 0 }, 0);
 
 			const blobsAfter = physics.getBlobs();
-			// At least some blobs should have changed velocity due to gravity
+			
 			expect(blobsAfter.length).toBeGreaterThan(0);
 		});
 
@@ -165,7 +165,7 @@ describe('BlobPhysics', () => {
 			physics.initializeBlobs();
 			physics.updateMousePosition(50, 50);
 
-			// Should not throw with scroll stickiness
+			
 			expect(() => {
 				physics.update(16, 0, { x: 0, y: 0 }, { x: 0, y: 0, z: 0 }, 0.5);
 			}).not.toThrow();
@@ -194,7 +194,7 @@ describe('BlobPhysics', () => {
 		it('should track mouse velocity', () => {
 			physics.updateMousePosition(50, 50);
 			physics.updateMousePosition(55, 55);
-			// Should not throw, velocity is tracked internally
+			
 			expect(() => physics.updateMousePosition(60, 60)).not.toThrow();
 		});
 	});
@@ -217,14 +217,14 @@ describe('BlobPhysics', () => {
 		it('should keep blobs within extended physics bounds', () => {
 			physics.initializeBlobs();
 
-			// Run many updates
+			
 			for (let i = 0; i < 500; i++) {
 				physics.update(16, i * 0.016, { x: 5, y: 5 }, { x: 0, y: 0, z: 0 }, 0);
 			}
 
 			const blobs = physics.getBlobs();
 			for (const blob of blobs) {
-				// Extended bounds are -40 to 140, with margin based on blob size
+				
 				expect(blob.currentX).toBeGreaterThanOrEqual(-40);
 				expect(blob.currentX).toBeLessThanOrEqual(140);
 				expect(blob.currentY).toBeGreaterThanOrEqual(-40);
@@ -288,9 +288,9 @@ describe('BlobPhysics', () => {
 	});
 });
 
-// ============================================================================
-// TinyLandPhysics Tests
-// ============================================================================
+
+
+
 describe('TinyLandPhysics', () => {
 	let physics: TinyLandPhysics;
 	const config: BlobConfig = {
@@ -353,7 +353,7 @@ describe('TinyLandPhysics', () => {
 			}
 
 			const updatedBlobs = physics.getBlobs();
-			// Due to random drift, positions should change
+			
 			let anyChanged = false;
 			for (let i = 0; i < updatedBlobs.length; i++) {
 				if (updatedBlobs[i].x !== initialBlobs[i].x || updatedBlobs[i].y !== initialBlobs[i].y) {
@@ -414,7 +414,7 @@ describe('TinyLandPhysics', () => {
 			physics.resize(1600, 1200);
 
 			const blobsAfter = physics.getBlobs();
-			// Positions should scale with the new dimensions
+			
 			expect(blobsAfter[0].x).not.toBe(xBefore);
 		});
 	});
@@ -433,7 +433,7 @@ describe('TinyLandPhysics', () => {
 
 			physics.start(callback);
 
-			// Give it a frame
+			
 			return new Promise<void>((resolve) => {
 				setTimeout(() => {
 					physics.stop();
@@ -451,9 +451,9 @@ describe('TinyLandPhysics', () => {
 	});
 });
 
-// ============================================================================
-// BlobPhysicsWASM Tests
-// ============================================================================
+
+
+
 describe('BlobPhysicsWASM', () => {
 	let physics: BlobPhysicsWASM;
 	const config: WASMBlobConfig = {
@@ -488,14 +488,14 @@ describe('BlobPhysicsWASM', () => {
 
 		it('should be idempotent on double init', async () => {
 			await physics.init();
-			await physics.init(); // Should not throw
+			await physics.init(); 
 			expect(physics.isReady()).toBe(true);
 		});
 	});
 
 	describe('tick', () => {
 		it('should not update before initialization', () => {
-			// Should not throw, just return early
+			
 			expect(() => {
 				physics.tick(16, 0);
 			}).not.toThrow();
@@ -507,7 +507,7 @@ describe('BlobPhysicsWASM', () => {
 			const stateBefore = physics.getBlobState(0);
 			expect(stateBefore).not.toBeNull();
 
-			// Run multiple ticks
+			
 			for (let i = 0; i < 100; i++) {
 				physics.tick(16, i * 0.016);
 			}
@@ -519,14 +519,14 @@ describe('BlobPhysicsWASM', () => {
 		it('should bounce blobs off boundaries', async () => {
 			await physics.init();
 
-			// Set a blob near the boundary with velocity towards it
+			
 			physics.setBlobState(0, { x: 99, y: 50, velocityX: 1, velocityY: 0, size: 10 });
 
 			physics.tick(16, 0);
 
 			const state = physics.getBlobState(0);
 			expect(state).not.toBeNull();
-			// Should have bounced
+			
 			expect(state!.x).toBeLessThanOrEqual(100);
 		});
 	});
@@ -589,7 +589,7 @@ describe('BlobPhysicsWASM', () => {
 			expect(blobs[0].color).toBe('red');
 			expect(blobs[1].color).toBe('blue');
 			expect(blobs[2].color).toBe('green');
-			expect(blobs[3].color).toBe('red'); // wraps around
+			expect(blobs[3].color).toBe('red'); 
 		});
 
 		it('should use HSL fallback without theme colors', async () => {
@@ -674,9 +674,9 @@ describe('BlobPhysicsWASM', () => {
 	});
 });
 
-// ============================================================================
-// ScrollHandler Tests
-// ============================================================================
+
+
+
 describe('ScrollHandler', () => {
 	let handler: ScrollHandler;
 
@@ -769,7 +769,7 @@ describe('ScrollHandler', () => {
 
 		it('should generate pull forces for significant scrolling', () => {
 			vi.setSystemTime(1000);
-			// Generate a fast scroll to trigger pull forces
+			
 			handler.handleScroll(createWheelEvent(500));
 
 			const forces = handler.getPullForces();
@@ -790,9 +790,9 @@ describe('ScrollHandler', () => {
 	});
 });
 
-// ============================================================================
-// BlobPathGenerator Tests
-// ============================================================================
+
+
+
 describe('BlobPathGenerator', () => {
 	function createTestBlob(overrides: Partial<ConvexBlob> = {}): ConvexBlob {
 		return {
@@ -907,9 +907,9 @@ describe('BlobPathGenerator', () => {
 	});
 });
 
-// ============================================================================
-// DeviceMotion Tests
-// ============================================================================
+
+
+
 describe('DeviceMotion', () => {
 	let deviceMotion: DeviceMotion;
 	let callback: ReturnType<typeof vi.fn>;
@@ -931,10 +931,10 @@ describe('DeviceMotion', () => {
 
 	describe('initialize', () => {
 		it('should handle non-secure context', async () => {
-			// jsdom doesn't set isSecureContext to true by default
+			
 			const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
-			// In jsdom, window.isSecureContext is false
+			
 			if (!window.isSecureContext) {
 				await deviceMotion.initialize();
 				expect(warnSpy).toHaveBeenCalledWith(
@@ -969,9 +969,9 @@ describe('DeviceMotion', () => {
 	});
 });
 
-// ============================================================================
-// BlobRenderer Tests
-// ============================================================================
+
+
+
 describe('BlobRenderer', () => {
 	it('should create instance', () => {
 		const renderer = new BlobRenderer();
@@ -985,9 +985,9 @@ describe('BlobRenderer', () => {
 	});
 });
 
-// ============================================================================
-// Schema Tests
-// ============================================================================
+
+
+
 describe('Schema', () => {
 	describe('DEFAULT_CONFIG', () => {
 		it('should have version 1.0.0', () => {
@@ -1105,9 +1105,9 @@ describe('Schema', () => {
 			});
 
 			expect(result.core.blobCount).toBe(20);
-			expect(result.core.fps).toBe(60); // unchanged
+			expect(result.core.fps).toBe(60); 
 			expect(result.physics.gravity).toBe(0.5);
-			expect(result.physics.viscosity).toBe(0.3); // unchanged
+			expect(result.physics.viscosity).toBe(0.3); 
 		});
 
 		it('should override feature flags', () => {
@@ -1117,7 +1117,7 @@ describe('Schema', () => {
 
 			expect(result.features.debug).toBe(true);
 			expect(result.features.webWorker).toBe(true);
-			expect(result.features.deviceMotion).toBe(true); // unchanged
+			expect(result.features.deviceMotion).toBe(true); 
 		});
 
 		it('should override theme settings', () => {
@@ -1136,9 +1136,9 @@ describe('Schema', () => {
 	});
 });
 
-// ============================================================================
-// Types Tests
-// ============================================================================
+
+
+
 describe('Types', () => {
 	describe('ConvexBlob interface', () => {
 		it('should accept a valid ConvexBlob object', () => {
@@ -1193,7 +1193,7 @@ describe('Types', () => {
 				radiusVariations: [],
 				fluidMass: 1,
 				scrollAffinity: 0.5,
-				// Optional properties
+				
 				surfaceTension: 0.02,
 				density: 0.5,
 				flowResistance: 0.001,
