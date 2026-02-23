@@ -88,12 +88,12 @@ export class TinyLandPhysics {
   private animationId: number | null = null;
   private isDark = false;
 
-  // Extended margin system
+  
   private readonly MARGIN_EXTENSION = 1.2;
   private readonly PHYSICS_MIN = -40;
   private readonly PHYSICS_MAX = 140;
 
-  // Color definitions
+  
   private lightColors: Record<string, ColorDefinition> = {
     transBlueGlow: { color: 'rgba(91, 206, 250, 0.8)', attractive: true, scrollAffinity: 0.4 },
     transPinkGlow: { color: 'rgba(245, 169, 184, 0.88)', attractive: true, scrollAffinity: 0.8 },
@@ -138,10 +138,10 @@ export class TinyLandPhysics {
       const clampedX = Math.max(this.PHYSICS_MIN + 25, Math.min(this.PHYSICS_MAX - 25, baseX));
       const clampedY = Math.max(this.PHYSICS_MIN + 25, Math.min(this.PHYSICS_MAX - 25, baseY));
 
-      // Dramatically larger blob sizes
+      
       const baseSize = 28 + Math.random() * 18;
 
-      // Create organic blob shape points
+      
       const numControlPoints = 16;
       const controlPoints = [];
       const controlVelocities = [];
@@ -168,14 +168,14 @@ export class TinyLandPhysics {
         });
       }
 
-      // Convert to standard Blob interface with extended properties
+      
       const blob: ConvexBlob = {
         id: i,
         x: clampedX * this.width / 100,
         y: clampedY * this.height / 100,
         vx: (Math.random() - 0.5) * 0.06,
         vy: (Math.random() - 0.5) * 0.06,
-        radius: baseSize * 2.5, // Larger for visual impact
+        radius: baseSize * 2.5, 
         targetX: clampedX * this.width / 100,
         targetY: clampedY * this.height / 100,
         color: colorData.color,
@@ -187,7 +187,7 @@ export class TinyLandPhysics {
         deformY: 1,
         rotation: Math.random() * Math.PI * 2,
 
-        // Extended properties for ConvexBlob
+        
         baseX: clampedX,
         baseY: clampedY,
         currentX: clampedX,
@@ -245,7 +245,7 @@ export class TinyLandPhysics {
   }
 
   updateMouse(x: number, y: number) {
-    // Convert to percentage coordinates
+    
     const percentX = (x / this.width) * 100;
     const percentY = (y / this.height) * 100;
 
@@ -259,7 +259,7 @@ export class TinyLandPhysics {
   }
 
   updateScroll(scrollY: number, velocity?: number) {
-    // Implement scroll-based forces
+    
     this.blobs.forEach(blob => {
       const scrollForce = velocity ? velocity * 0.1 : 0;
       blob.vy += scrollForce * blob.scrollAffinity;
@@ -267,9 +267,9 @@ export class TinyLandPhysics {
   }
 
   updateDeviceMotion(beta: number, gamma: number, acceleration?: DeviceMotionEvent['accelerationIncludingGravity']) {
-    // Apply device tilt to blob physics
-    const tiltX = gamma / 90; // -1 to 1
-    const tiltY = beta / 90;  // -2 to 2
+    
+    const tiltX = gamma / 90; 
+    const tiltY = beta / 90;  
 
     this.blobs.forEach(blob => {
       blob.vx += tiltX * 0.5;
@@ -291,7 +291,7 @@ export class TinyLandPhysics {
 
   updateTheme(theme: string) {
     this.isDark = typeof document !== 'undefined' && document.documentElement.classList.contains('dark');
-    // Re-initialize blobs with new colors
+    
     this.initBlobs();
   }
 
@@ -313,7 +313,7 @@ export class TinyLandPhysics {
   }
 
   private updateBlob(blob: ConvexBlob, dt: number) {
-    // Mouse interaction
+    
     const mouseXPixel = this.mouseX * this.width / 100;
     const mouseYPixel = this.mouseY * this.height / 100;
     const dx = mouseXPixel - blob.x;
@@ -329,7 +329,7 @@ export class TinyLandPhysics {
       blob.velocityY = blob.vy;
     }
 
-    // Anti-clustering
+    
     this.blobs.forEach(other => {
       if (other.id === blob.id) return;
 
@@ -347,7 +347,7 @@ export class TinyLandPhysics {
       }
     });
 
-    // Territory-based movement
+    
     const territoryXPixel = (blob.territoryX ?? blob.baseX) * this.width / 100;
     const territoryYPixel = (blob.territoryY ?? blob.baseY) * this.height / 100;
     const territoryDx = territoryXPixel - blob.x;
@@ -361,26 +361,26 @@ export class TinyLandPhysics {
       blob.vy += territoryDy * returnForce;
     }
 
-    // Apply velocity
+    
     blob.x += blob.vx * dt;
     blob.y += blob.vy * dt;
     blob.rotation = (blob.rotation ?? 0) + (blob.vx * 0.001 + blob.vy * 0.001) * dt;
 
-    // Update normalized positions
+    
     blob.currentX = blob.x / this.width * 100;
     blob.currentY = blob.y / this.height * 100;
 
-    // Damping
+    
     blob.vx *= 0.92;
     blob.vy *= 0.92;
     blob.velocityX = blob.vx;
     blob.velocityY = blob.vy;
 
-    // Gradually restore deformation
+    
     blob.deformX = (blob.deformX ?? 1) + (1 - (blob.deformX ?? 1)) * 0.1;
     blob.deformY = (blob.deformY ?? 1) + (1 - (blob.deformY ?? 1)) * 0.1;
 
-    // Keep within extended bounds
+    
     const minX = this.PHYSICS_MIN * this.width / 100;
     const maxX = this.PHYSICS_MAX * this.width / 100;
     const minY = this.PHYSICS_MIN * this.height / 100;
@@ -400,7 +400,7 @@ export class TinyLandPhysics {
     scrollStickiness?: number,
     pullForces?: Array<{ strength: number; time: number; randomness: number; explosive: boolean }>
   ) {
-    // Apply gravity if provided
+    
     if (gravity) {
       this.blobs.forEach(blob => {
         blob.vx += gravity.x * 0.1;
@@ -408,7 +408,7 @@ export class TinyLandPhysics {
       });
     }
 
-    // Apply pull forces from scrolling
+    
     if (pullForces) {
       pullForces.forEach(force => {
         this.blobs.forEach(blob => {
@@ -420,12 +420,12 @@ export class TinyLandPhysics {
       });
     }
 
-    // Update all blobs
+    
     this.blobs.forEach(blob => this.updateBlob(blob, dt / 16.67));
   }
 
   getBlobs(): Blob[] {
-    // Convert ConvexBlob array to Blob array for compatibility
+    
     return this.blobs.map(blob => ({
       id: blob.id,
       x: blob.x,

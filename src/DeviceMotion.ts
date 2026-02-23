@@ -8,13 +8,13 @@ export class DeviceMotion {
   }
 
   async initialize(): Promise<void> {
-    // Check if we're in a secure context (required for these APIs)
+    
     if (!window.isSecureContext) {
       console.warn('DeviceMotion APIs require a secure context (HTTPS)');
       return;
     }
 
-    // Try DeviceMotionEvent first (accelerometer)
+    
     if ('DeviceMotionEvent' in window) {
       this.useMotionAPI = true;
       console.log('DeviceMotionEvent API available');
@@ -26,7 +26,7 @@ export class DeviceMotion {
       return;
     }
 
-    // Check if permission is needed before starting
+    
     const hasPermission = await this.requestPermission();
     if (hasPermission) {
       this.startListening();
@@ -36,7 +36,7 @@ export class DeviceMotion {
   }
 
   async requestPermission(): Promise<boolean> {
-    // For iOS 13+ devices, we need to request permission
+    
     if (this.useMotionAPI && typeof (DeviceMotionEvent as any).requestPermission === 'function') {
       try {
         const response = await (DeviceMotionEvent as any).requestPermission();
@@ -55,7 +55,7 @@ export class DeviceMotion {
       }
     }
 
-    // For other devices, permission is implicit
+    
     return true;
   }
 
@@ -77,8 +77,8 @@ export class DeviceMotion {
       const { x, y, z } = event.accelerationIncludingGravity;
       if (x === null || y === null || z === null) return;
 
-      // Normalize accelerometer values
-      // Typical range is -9.8 to 9.8 m/s² (gravity)
+      
+      
       const data = {
         x: Math.max(-1, Math.min(1, x / 9.8)),
         y: Math.max(-1, Math.min(1, y / 9.8)),
@@ -95,14 +95,14 @@ export class DeviceMotion {
     try {
       if (event.beta === null || event.gamma === null) return;
 
-      // Beta: Front-to-back tilt in degrees (-180 to 180)
-      // Gamma: Left-to-right tilt in degrees (-90 to 90)
-      // Alpha: Compass direction (0 to 360)
+      
+      
+      
 
       const data = {
-        x: event.beta / 90,  // Normalize to -2 to 2
-        y: event.gamma / 90, // Normalize to -1 to 1
-        z: event.alpha ? event.alpha / 360 : 0 // Normalize to 0 to 1
+        x: event.beta / 90,  
+        y: event.gamma / 90, 
+        z: event.alpha ? event.alpha / 360 : 0 
       };
 
       this.callback(data);

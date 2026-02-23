@@ -51,7 +51,7 @@ export interface ConvexBlob {
 	surfaceTension?: number;
 	density?: number;
 	flowResistance?: number;
-	// **DYNAMIC SHAPE PROPERTIES**
+	
 	controlPoints?: Array<{
 		radius: number;
 		angle: number;
@@ -72,22 +72,22 @@ export interface ConvexBlob {
 	lastCollisionTime?: number;
 	mergeThreshold?: number;
 	splitThreshold?: number;
-	// **SETTLING AND FLUID BEHAVIOR PROPERTIES**
+	
 	isSettled?: boolean;
 	settleTime?: number;
 	groundContactPoints?: number[];
 	restHeight?: number;
-	// **WATER-ON-GLASS PROPERTIES**
+	
 	wetting?: number;
 	contactAngle?: number;
 	pressureDistribution?: number[];
 	chaosLevel?: number;
 	turbulenceDecay?: number;
-	// **STABILITY PROPERTIES**
+	
 	dampingFactor?: number;
 	stabilityThreshold?: number;
 	lastStableTime?: number;
-	// **90S SCREENSAVER PROPERTIES**
+	
 	expansionPhase?: boolean;
 	expansionTime?: number;
 	maxExpansionTime?: number;
@@ -95,11 +95,11 @@ export interface ConvexBlob {
 	lastBounceTime?: number;
 	driftAngle?: number;
 	driftSpeed?: number;
-	// **DISPERSION PROPERTIES**
+	
 	territoryRadius?: number;
 	territoryX?: number;
 	territoryY?: number;
-	// **ENHANCED ANTI-CLUSTERING PROPERTIES**
+	
 	personalSpace?: number;
 	repulsionStrength?: number;
 	lastRepulsionTime?: number;

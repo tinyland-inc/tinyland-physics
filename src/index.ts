@@ -1,22 +1,22 @@
-/**
- * @tummycrypt/tinyland-physics
- *
- * Physics simulation engines for blob animations, scroll handling, and device motion.
- *
- * @packageDocumentation
- */
 
-// Core physics engines
+
+
+
+
+
+
+
+
 export { BlobPhysics } from './BlobPhysics.js';
 export { TinyLandPhysics } from './TinyLandPhysics.js';
 export { BlobPhysicsWASM } from './BlobPhysicsWASM.js';
 export type { BlobConfig as WASMBlobConfig, BlobState } from './BlobPhysicsWASM.js';
 
-// Input handlers
+
 export { ScrollHandler } from './ScrollHandler.js';
 export { DeviceMotion } from './DeviceMotion.js';
 
-// Path generation
+
 export {
 	generateSmoothBlobPath,
 	generateSmoothBlobPathSync,
@@ -26,10 +26,10 @@ export {
 	isWasmReady,
 } from './BlobPathGenerator.js';
 
-// Renderer
+
 export { BlobRenderer } from './BlobRenderer.js';
 
-// Types (from types.ts)
+
 export type {
 	Blob,
 	BlobConfig,
@@ -40,7 +40,7 @@ export type {
 	VectorProps,
 } from './types.js';
 
-// Schema (from schema.ts)
+
 export type {
 	TinyVectorsConfig,
 	CoreConfig,
@@ -77,8 +77,8 @@ export {
 	mergeConfig,
 } from './schema.js';
 
-// Re-export DeviceMotionData and ScrollData from schema as well
-// (schema has extended versions with extra fields)
+
+
 export type {
 	DeviceMotionData as SchemaDeviceMotionData,
 	ScrollData as SchemaScrollData,
