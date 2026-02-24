@@ -96,7 +96,7 @@ describe('BlobPhysics', () => {
 			const blobs = physics.initializeBlobs();
 			for (const blob of blobs) {
 				expect(blob.color).toBeTruthy();
-				expect(blob.color).toContain('rgba');
+				expect(blob.color).toContain('oklch');
 			}
 		});
 
