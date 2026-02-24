@@ -17,29 +17,29 @@ export class BlobPhysics {
 
 	private lightColors: Record<string, ColorDefinition> = {
 		
-		transBlueGlow: { color: 'rgba(91, 206, 250, 0.8)', attractive: true, scrollAffinity: 0.4 },
-		transPinkGlow: { color: 'rgba(245, 169, 184, 0.88)', attractive: true, scrollAffinity: 0.8 },
-		cloudWhite: { color: 'rgba(255, 255, 255, 0.7)', attractive: false, scrollAffinity: 0.3 },
+		transBlueGlow: { color: 'oklch(80.3% 0.12 226.5deg / 0.8)', attractive: true, scrollAffinity: 0.4 },
+		transPinkGlow: { color: 'oklch(81.2% 0.091 6.3deg / 0.88)', attractive: true, scrollAffinity: 0.8 },
+		cloudWhite: { color: 'oklch(100% 0 0deg / 0.7)', attractive: false, scrollAffinity: 0.3 },
 
 		
-		lavenderMist: { color: 'rgba(220, 220, 255, 0.7)', attractive: false, scrollAffinity: 0.35 },
-		blushPink: { color: 'rgba(255, 160, 220, 0.8)', attractive: false, scrollAffinity: 0.4 },
-		powderBlue: { color: 'rgba(160, 190, 255, 0.8)', attractive: false, scrollAffinity: 0.45 },
-		pearlWhite: { color: 'rgba(255, 255, 255, 0.5)', attractive: false, scrollAffinity: 0.25 }
+		lavenderMist: { color: 'oklch(90.5% 0.048 285.4deg / 0.7)', attractive: false, scrollAffinity: 0.35 },
+		blushPink: { color: 'oklch(81.9% 0.134 342.1deg / 0.8)', attractive: false, scrollAffinity: 0.4 },
+		powderBlue: { color: 'oklch(80.3% 0.098 265.1deg / 0.8)', attractive: false, scrollAffinity: 0.45 },
+		pearlWhite: { color: 'oklch(100% 0 0deg / 0.5)', attractive: false, scrollAffinity: 0.25 }
 	};
 
 	private darkColors: Record<string, ColorDefinition> = {
 		
-		transBlueGlow: { color: 'rgba(91, 206, 250, 0.8)', attractive: true, scrollAffinity: 0.6 },
-		transPinkGlow: { color: 'rgba(245, 169, 184, 0.75)', attractive: false, scrollAffinity: 0.3 },
-		transBlackAccent: { color: 'rgba(40, 40, 40, 0.6)', attractive: false, scrollAffinity: 0.2 },
+		transBlueGlow: { color: 'oklch(80.3% 0.12 226.5deg / 0.8)', attractive: true, scrollAffinity: 0.6 },
+		transPinkGlow: { color: 'oklch(81.2% 0.091 6.3deg / 0.75)', attractive: false, scrollAffinity: 0.3 },
+		transBlackAccent: { color: 'oklch(27.7% 0 0deg / 0.6)', attractive: false, scrollAffinity: 0.2 },
 
 		
-		prideRedNeon: { color: 'rgba(255, 50, 50, 0.75)', attractive: false, scrollAffinity: 0.35 },
-		prideOrangeNeon: { color: 'rgba(255, 165, 0, 0.8)', attractive: false, scrollAffinity: 0.4 },
-		prideGreenNeon: { color: 'rgba(50, 205, 50, 0.75)', attractive: false, scrollAffinity: 0.3 },
-		prideBlueNeon: { color: 'rgba(70, 130, 255, 0.8)', attractive: false, scrollAffinity: 0.35 },
-		pridePurpleNeon: { color: 'rgba(160, 70, 180, 0.8)', attractive: false, scrollAffinity: 0.4 }
+		prideRedNeon: { color: 'oklch(64.8% 0.238 27deg / 0.75)', attractive: false, scrollAffinity: 0.35 },
+		prideOrangeNeon: { color: 'oklch(79.3% 0.171 70.7deg / 0.8)', attractive: false, scrollAffinity: 0.4 },
+		prideGreenNeon: { color: 'oklch(74.2% 0.229 142.8deg / 0.75)', attractive: false, scrollAffinity: 0.3 },
+		prideBlueNeon: { color: 'oklch(63.3% 0.197 262.8deg / 0.8)', attractive: false, scrollAffinity: 0.35 },
+		pridePurpleNeon: { color: 'oklch(55.6% 0.183 320deg / 0.8)', attractive: false, scrollAffinity: 0.4 }
 	};
 
 	
@@ -54,36 +54,36 @@ export class BlobPhysics {
 		},
 		pride: {
 			light: {
-				prideRed: { color: 'rgba(228, 3, 3, 0.7)', attractive: true, scrollAffinity: 0.4 },
-				prideOrange: { color: 'rgba(255, 140, 0, 0.7)', attractive: false, scrollAffinity: 0.45 },
-				prideYellow: { color: 'rgba(255, 237, 0, 0.7)', attractive: false, scrollAffinity: 0.5 },
-				prideGreen: { color: 'rgba(0, 128, 38, 0.7)', attractive: false, scrollAffinity: 0.4 },
-				prideBlue: { color: 'rgba(36, 64, 142, 0.7)', attractive: true, scrollAffinity: 0.55 },
-				pridePurple: { color: 'rgba(115, 41, 130, 0.7)', attractive: false, scrollAffinity: 0.5 }
+				prideRed: { color: 'oklch(57.8% 0.236 29.1deg / 0.7)', attractive: true, scrollAffinity: 0.4 },
+				prideOrange: { color: 'oklch(75.1% 0.179 58.3deg / 0.7)', attractive: false, scrollAffinity: 0.45 },
+				prideYellow: { color: 'oklch(93.1% 0.197 104deg / 0.7)', attractive: false, scrollAffinity: 0.5 },
+				prideGreen: { color: 'oklch(52.2% 0.16 145.9deg / 0.7)', attractive: false, scrollAffinity: 0.4 },
+				prideBlue: { color: 'oklch(39.8% 0.134 265.7deg / 0.7)', attractive: true, scrollAffinity: 0.55 },
+				pridePurple: { color: 'oklch(42.9% 0.155 320.5deg / 0.7)', attractive: false, scrollAffinity: 0.5 }
 			},
 			dark: {
-				prideRedNeon: { color: 'rgba(255, 50, 50, 0.8)', attractive: true, scrollAffinity: 0.45 },
-				prideOrangeNeon: { color: 'rgba(255, 165, 0, 0.85)', attractive: false, scrollAffinity: 0.5 },
-				prideYellowNeon: { color: 'rgba(255, 255, 51, 0.85)', attractive: false, scrollAffinity: 0.55 },
-				prideGreenNeon: { color: 'rgba(50, 205, 50, 0.8)', attractive: false, scrollAffinity: 0.45 },
-				prideBlueNeon: { color: 'rgba(70, 130, 255, 0.85)', attractive: true, scrollAffinity: 0.6 },
-				pridePurpleNeon: { color: 'rgba(160, 70, 180, 0.85)', attractive: false, scrollAffinity: 0.55 }
+				prideRedNeon: { color: 'oklch(64.8% 0.238 27deg / 0.8)', attractive: true, scrollAffinity: 0.45 },
+				prideOrangeNeon: { color: 'oklch(79.3% 0.171 70.7deg / 0.85)', attractive: false, scrollAffinity: 0.5 },
+				prideYellowNeon: { color: 'oklch(96.9% 0.201 109.6deg / 0.85)', attractive: false, scrollAffinity: 0.55 },
+				prideGreenNeon: { color: 'oklch(74.2% 0.229 142.8deg / 0.8)', attractive: false, scrollAffinity: 0.45 },
+				prideBlueNeon: { color: 'oklch(63.3% 0.197 262.8deg / 0.85)', attractive: true, scrollAffinity: 0.6 },
+				pridePurpleNeon: { color: 'oklch(55.6% 0.183 320deg / 0.85)', attractive: false, scrollAffinity: 0.55 }
 			}
 		},
 		trans: {
 			light: {
-				transBlue: { color: 'rgba(91, 206, 250, 0.75)', attractive: true, scrollAffinity: 0.4 },
-				transPink: { color: 'rgba(245, 169, 184, 0.8)', attractive: true, scrollAffinity: 0.8 },
-				transWhite: { color: 'rgba(255, 255, 255, 0.65)', attractive: false, scrollAffinity: 0.3 },
-				transSkyBlue: { color: 'rgba(170, 225, 250, 0.7)', attractive: false, scrollAffinity: 0.35 },
-				transRosePink: { color: 'rgba(250, 200, 210, 0.7)', attractive: false, scrollAffinity: 0.45 }
+				transBlue: { color: 'oklch(80.3% 0.12 226.5deg / 0.75)', attractive: true, scrollAffinity: 0.4 },
+				transPink: { color: 'oklch(81.2% 0.091 6.3deg / 0.8)', attractive: true, scrollAffinity: 0.8 },
+				transWhite: { color: 'oklch(100% 0 0deg / 0.65)', attractive: false, scrollAffinity: 0.3 },
+				transSkyBlue: { color: 'oklch(88% 0.066 227.6deg / 0.7)', attractive: false, scrollAffinity: 0.35 },
+				transRosePink: { color: 'oklch(87.9% 0.058 4.9deg / 0.7)', attractive: false, scrollAffinity: 0.45 }
 			},
 			dark: {
-				transBlueNeon: { color: 'rgba(91, 206, 250, 0.85)', attractive: true, scrollAffinity: 0.6 },
-				transPinkNeon: { color: 'rgba(245, 169, 184, 0.8)', attractive: false, scrollAffinity: 0.35 },
-				transWhiteGlow: { color: 'rgba(255, 255, 255, 0.75)', attractive: false, scrollAffinity: 0.25 },
-				transBlueGlow: { color: 'rgba(125, 215, 252, 0.8)', attractive: false, scrollAffinity: 0.4 },
-				transPinkGlow: { color: 'rgba(252, 174, 198, 0.8)', attractive: false, scrollAffinity: 0.5 }
+				transBlueNeon: { color: 'oklch(80.3% 0.12 226.5deg / 0.85)', attractive: true, scrollAffinity: 0.6 },
+				transPinkNeon: { color: 'oklch(81.2% 0.091 6.3deg / 0.8)', attractive: false, scrollAffinity: 0.35 },
+				transWhiteGlow: { color: 'oklch(100% 0 0deg / 0.75)', attractive: false, scrollAffinity: 0.25 },
+				transBlueGlow: { color: 'oklch(83.6% 0.101 226.6deg / 0.8)', attractive: false, scrollAffinity: 0.4 },
+				transPinkGlow: { color: 'oklch(83.2% 0.096 359.3deg / 0.8)', attractive: false, scrollAffinity: 0.5 }
 			}
 		}
 	};
